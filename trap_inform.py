@@ -73,14 +73,15 @@ def add_transport(snmpEngine, PORT, ip_type):
         config.addTransport(
                              snmpEngine,
                              udp.domainName,
-                             udp.Udp6SocketTransport().openServerMode(('0.0.0.0',
+                             udp6.Udp6SocketTransport().openServerMode((
+                                 '0.0.0.0',
                                                            int(PORT)))
                             )
     else:
         config.addTransport(
                              snmpEngine,
                              udp.domainName,
-                             udp6.UdpTransport().openServerMode(('::',
+                             udp.UdpTransport().openServerMode(('::',
                                                            int(PORT)))
                             )
 
