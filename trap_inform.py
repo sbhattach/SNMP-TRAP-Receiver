@@ -69,21 +69,26 @@ def add_transport(snmpEngine, PORT, ip_type):
     :param snmpEngine:
     :return:
     """
-    if ip_type == '6':
-        config.addTransport(
+    try:
+
+        if ip_type == '6':
+            config.addTransport(
                              snmpEngine,
                              udp.domainName,
                              udp6.Udp6SocketTransport().openServerMode((
-                                 '0.0.0.0',
-                                                           int(PORT)))
+                                 '::', int(PORT)))
                             )
-    else:
-        config.addTransport(
+        else:
+            config.addTransport(
                              snmpEngine,
                              udp.domainName,
-                             udp.UdpTransport().openServerMode(('::',
+                             udp.UdpTransport().openServerMode(('0.0.0.0',
                                                            int(PORT)))
                             )
+    except error.CarrierError as excep:
+        print "Port Binding Failed the Provided Port {} is in Use".format(PORT)
+
+
 
 def add_snmp_v3(snmpEngine):
     """
