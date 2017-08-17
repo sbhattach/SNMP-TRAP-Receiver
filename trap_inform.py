@@ -87,6 +87,8 @@ def add_snmp_v3(snmpEngine):
         'usmAesCfb256Protocol': config.usmAesCfb256Protocol,
         'usmAesCfb192Protocol': config.usmAesCfb192Protocol,
         'usmDESPrivProtocol': config.usmDESPrivProtocol,
+        'usmNoAuthProtocol': config.usmNoAuthProtocol,
+        'usmNoPrivProtocol': config.usmNoPrivProtocol
     }
     while 1:
          V3=raw_input("Want to add New V3 User (Yes/No/n/y)?")
@@ -111,8 +113,10 @@ def add_snmp_v3(snmpEngine):
              config.addV3User(
                              snmpEngine, userName=v3_user,
                                   authKey=v3_authkey, privKey=v3_privkey,
-                                  authProtocol=__authProtocol.get(authProtocol),
-                                  privProtocol=__authProtocol.get(privProtocol),
+                                  authProtocol=__authProtocol.get(
+                                      authProtocol, config.usmNoAuthProtocol),
+                                  privProtocol=__authProtocol.get(
+                                      privProtocol,config.usmNoPrivProtocol),
                                   securityEngineId=v2c.OctetString(
                                   hexValue=securityEngineId))
          elif V3 in ["No", "n", "N", "no"]:
