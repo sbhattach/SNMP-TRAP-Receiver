@@ -69,18 +69,18 @@ def add_transport(snmpEngine, PORT, ip_type):
     :param snmpEngine:
     :return:
     """
-    if ip_type == '4':
+    if ip_type == '6':
         config.addTransport(
                              snmpEngine,
                              udp.domainName,
-                             udp.UdpTransport().openServerMode(('0.0.0.0',
+                             udp.Udp6SocketTransport().openServerMode(('0.0.0.0',
                                                            int(PORT)))
                             )
-    if ip_type== '6':
+    else:
         config.addTransport(
                              snmpEngine,
                              udp.domainName,
-                             udp6.Udp6SocketTransport().openServerMode(('::',
+                             udp6.UdpTransport().openServerMode(('::',
                                                            int(PORT)))
                             )
 
