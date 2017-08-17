@@ -6,7 +6,7 @@ import argparse
 
 try:
     from pysnmp.entity import engine, config
-    from pysnmp.carrier.asyncore.dgram import udp
+    from pysnmp.carrier.asyncore.dgram import udp, udp6
     from pysnmp.entity.rfc3413 import ntfrcv
     from pysnmp.proto.api import v2c
     from pysnmp.smi import builder, view, compiler, rfc1902, error
@@ -15,6 +15,7 @@ except ImportError:
     print "IMPORT ERROR Please install PYSNMP 4.3.8 usning"
 
 mibViewController = None
+pdu_count = 1
 
 def user_input(snmpEngine):
     """
@@ -29,6 +30,8 @@ def user_input(snmpEngine):
     PORT=raw_input("Please Provide The SNMP Trap Port: ")
     print "\n"
     vserion = raw_input("Please Enter SNMP Version [OPTION: 1,2,3] :")
+    print "\n"
+    ip_type = raw_input("Please IP Type [OPTION: 4, 6] :")
     print "\n"
     if vserion in ['1', '2']:
         COMMUNITYSTRING = raw_input("Please Provide SNMP V1/V2 community "
@@ -58,21 +61,28 @@ def user_input(snmpEngine):
     LOAD_MIB_MODULE = raw_input("Please provide the custom MIB Name seperated "
                               "by comma: ")
     print "\n"
-    return COMMUNITYSTRING, CUSTOM_MIB_PATH, PORT, LOAD_MIB_MODULE
+    return COMMUNITYSTRING, CUSTOM_MIB_PATH, PORT, LOAD_MIB_MODULE, ip_type
 
 
-
-
-def add_transport(snmpEngine, PORT):
+def add_transport(snmpEngine, PORT, ip_type):
     """
     :param snmpEngine:
     :return:
     """
-    config.addTransport(
-    snmpEngine,
-    udp.domainName,
-    udp.UdpTransport().openServerMode(('0.0.0.0', int(PORT)))
-     )
+    if ip_type == '4':
+        config.addTransport(
+                             snmpEngine,
+                             udp.domainName,
+                             udp.UdpTransport().openServerMode(('0.0.0.0',
+                                                           int(PORT)))
+                            )
+    if ip_type== '6':
+        config.addTransport(
+                             snmpEngine,
+                             udp.domainName,
+                             udp6.Udp6SocketTransport().openServerMode(('::',
+                                                           int(PORT)))
+                            )
 
 def add_snmp_v3(snmpEngine):
     """
@@ -139,8 +149,6 @@ def mib_builder(custom_mib_path, LOAD_MIB_MODULE):
         print " {} Mib Not Found!".format(excep)
 
 
-
-pdu_count = 1
 def cbFun(snmpEngine, stateReference, contextEngineId, contextName,
           varBinds, cbCtx):
     global pdu_count
@@ -173,11 +181,11 @@ if __name__ == "__main__":
     check_parser()
 
     snmpEngine = engine.SnmpEngine()
-    COMMUNITYSTRING, CUSTOM_MIB_PATH, PORT, LOAD_MIB_MODULE = user_input(
+    COMMUNITYSTRING, CUSTOM_MIB_PATH, PORT, LOAD_MIB_MODULE, ip_type = user_input(
         snmpEngine)
     mib_builder(CUSTOM_MIB_PATH, LOAD_MIB_MODULE)
     ntfrcv.NotificationReceiver(snmpEngine, cbFun)
-    add_transport(snmpEngine, PORT)
+    add_transport(snmpEngine, PORT, ip_type)
     snmpEngine.transportDispatcher.jobStarted(1)
     try:
         print "Trap Listener started ....."
