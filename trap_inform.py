@@ -85,8 +85,8 @@ def add_transport(snmpEngine, PORT, ip_type):
                              udp.UdpTransport().openServerMode(('0.0.0.0',
                                                            int(PORT)))
                             )
-    except error.CarrierError as excep:
-        print "Port Binding Failed the Provided Port {} is in Use".format(PORT)
+    except Exception as e:
+        print "{} Port Binding Failed the Provided Port {} is in Use".format(e, PORT)
 
 
 
@@ -189,7 +189,6 @@ if __name__ == "__main__":
     snmpEngine = engine.SnmpEngine()
     COMMUNITYSTRING, CUSTOM_MIB_PATH, PORT, LOAD_MIB_MODULE, ip_type = user_input(
         snmpEngine)
-    mib_builder(CUSTOM_MIB_PATH, LOAD_MIB_MODULE)
     ntfrcv.NotificationReceiver(snmpEngine, cbFun)
     add_transport(snmpEngine, PORT, ip_type)
     snmpEngine.transportDispatcher.jobStarted(1)
