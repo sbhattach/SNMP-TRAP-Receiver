@@ -42,6 +42,7 @@ steps:
       echo Write your commands here
       
       echo Hello world
+      echo $testVar
 
 - task: CmdLine@2
   inputs:
