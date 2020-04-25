@@ -43,7 +43,7 @@ parameters:
 
 
 trigger:
-- none
+- master
 
 pool:
   vmImage: ${{ parameters.image }}
