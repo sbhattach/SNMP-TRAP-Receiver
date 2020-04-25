@@ -4,8 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 
-variables:
-- template: vars.yml
+#variables:
+#- template: vars.yml
 
 parameters:
 
@@ -83,7 +83,7 @@ steps:
       
       echo Hello world
       echo $(testVar)
-      echo ${{ variables.JiraTasks }}
+      #echo ${{ variables.JiraTasks }}
 
 - task: CmdLine@2
   inputs:
