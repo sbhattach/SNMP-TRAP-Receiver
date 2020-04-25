@@ -1,3 +1,5 @@
 --- 
 variables: 
-  JiraTasks: 'Jira_task-1'
+  JiraTasks: 
+    - JiraTASK-1
+    - JiraTASK-2
