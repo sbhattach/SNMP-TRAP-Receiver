@@ -4,8 +4,10 @@
 # https://aka.ms/yaml
 
 
-variables:
-- template: vars.yml
+#variables:
+#- template: vars.yml
+
+
 
 parameters:
 - name: 'vmImage'
@@ -18,6 +20,12 @@ parameters:
   - ubuntu-16.04
   - macOS-latest
   - macOS-10.14
+
+- name: myObject
+  type: object
+  default:
+    variables: 
+      JiraTasks: 'JIRATASK-1 JIRATASK-2'
 
 jobs:
 - job: Build
