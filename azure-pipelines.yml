@@ -4,8 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 
-#variables:
-#- template: vars.yml
+variables:
+- template: vars.yml
 
 parameters:
 
@@ -46,7 +46,7 @@ trigger:
 - none
 
 pool:
-  vmImage: ${parameters.image}
+  vmImage: ${ parameters.image }
 
 strategy:
   matrix:
