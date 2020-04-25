@@ -36,6 +36,10 @@ parameters:
   - 3.7
   - 3.5
 
+- name: 'additionalVariables'
+  type: object
+  default: {}
+
 
 
 
