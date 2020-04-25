@@ -36,11 +36,10 @@ parameters:
   - 3.7
   - 3.5
 
-- name: additionalVariables
+- name: 'additionalVariables'
+  displayName: YML Structure
   type: object
-  default:
-    foo: FOO
-    bar: BAR
+  default: {}
 
 
 
