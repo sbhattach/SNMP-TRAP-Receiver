@@ -26,6 +26,16 @@ parameters:
   - PROD
   - PREPROD
 
+- name: PythonVersion
+  displayName: Python Version
+  type: string
+  default: 3.7
+  values:
+  - 2.7
+  - 3.6
+  - 3.7
+  - 3.5
+
 
 
 
@@ -37,7 +47,7 @@ pool:
 strategy:
   matrix:
     Python27:
-      python.version: '2.7'
+      python.version: ${{ parameters.PythonVersion }}
     #Python35:
     #  python.version: '3.5'
     #Python36:
