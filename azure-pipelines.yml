@@ -47,6 +47,7 @@ trigger:
 
 pool:
   vmImage: ${{ parameters.image }}
+
 strategy:
   matrix:
     Python27:
