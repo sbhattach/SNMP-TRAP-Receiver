@@ -7,11 +7,17 @@ parameters:
 - name: 'vmImage'
   default: 'ubuntu 16.04'
   type: string
+  values:
+  - windows-latest
+  - vs2017-win2016
+  - ubuntu-latest
+  - ubuntu-16.04
+  - macOS-latest
+  - macOS-10.14
 
 jobs:
 - job: Build
   pool:
     vmImage: ${{ parameters.vmImage }}
   steps:
-  - script: npm install
-  - script: npm test
+  - script: hostname
