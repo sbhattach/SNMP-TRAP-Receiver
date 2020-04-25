@@ -4,6 +4,12 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 parameters:
+
+- name: 'additionalVariables'
+  displayName: YML Structure
+  type: object
+
+
 - name: image
   displayName: Pool Image
   type: string
@@ -35,10 +41,6 @@ parameters:
   - 3.6
   - 3.7
   - 3.5
-
-- name: 'additionalVariables'
-  displayName: YML Structure
-  type: object
 
 
 
