@@ -37,8 +37,8 @@ parameters:
   - 3.5
 
 - name: 'additionalVariables'
-  type: object
-  default: {}
+  type: filePath
+  default: 
 
 
 
