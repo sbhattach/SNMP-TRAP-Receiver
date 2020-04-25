@@ -3,6 +3,10 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+
+variables:
+- template: vars.yml
+
 parameters:
 - name: 'vmImage'
   default: 'ubuntu 16.04'
@@ -21,3 +25,4 @@ jobs:
     vmImage: ${{ parameters.vmImage }}
   steps:
   - script: hostname
+  - script: echo ${{ variables.JiraTasks }}
