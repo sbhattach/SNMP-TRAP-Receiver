@@ -46,12 +46,12 @@ trigger:
 - none
 
 pool:
-  vmImage: ${ parameters.image }
+  vmImage: ${ {parameters.image} }
 
-strategy:
-  matrix:
-    Python27:
-      python.version: ${ parameters.PythonVersion }
+#strategy:
+  #matrix:
+    #Python27:
+    #  python.version: ${ parameters.PythonVersion }
     #Python35:
     #  python.version: '3.5'
     #Python36:
@@ -59,32 +59,34 @@ strategy:
     #Python37:
     #  python.version: '3.7'
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
-
-- script: |
-    python -m pip install --upgrade pip
-    python -m pip install nose
-    # pip install -r requirements.txt
-  displayName: 'Install dependencies'
-
-- script: |
-    pip install pytest pytest-azurepipelines
-    #pytest
-  displayName: 'pytest'
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo Write your commands here
-      
-      echo Hello world
-      echo $(testVar)
-      #echo ${{ variables.JiraTasks }}
-
-- task: CmdLine@2
-  inputs:
-    script: 'echo "The End"'
+jobs:
+- job: Build
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
+  
+  - script: |
+      python -m pip install --upgrade pip
+      python -m pip install nose
+      # pip install -r requirements.txt
+    displayName: 'Install dependencies'
+  
+  - script: |
+      pip install pytest pytest-azurepipelines
+      #pytest
+    displayName: 'pytest'
+  
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo Write your commands here
+        
+        echo Hello world
+        echo $(testVar)
+        #echo ${{ variables.JiraTasks }}
+  
+  - task: CmdLine@2
+    inputs:
+      script: 'echo "The End"'
