@@ -37,8 +37,10 @@ parameters:
   - 3.5
 
 - name: 'additionalVariables'
-  type: filePath
-  default: 
+  type: object
+  default:
+    foo: FOO
+    bar: BAR
 
 
 
