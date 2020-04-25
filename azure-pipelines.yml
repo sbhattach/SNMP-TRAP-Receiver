@@ -39,7 +39,7 @@ parameters:
 - name: 'additionalVariables'
   displayName: YML Structure
   type: object
-  default: {}
+  default: --- {}
 
 
 
