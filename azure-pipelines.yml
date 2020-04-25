@@ -16,6 +16,19 @@ parameters:
   - macOS-latest
   - macOS-10.14
 
+- name: BuildName
+  displayName: Build Name
+  type: string
+  default: QE
+  values:
+  - QE
+  - VE
+  - PROD
+  - PREPROD
+
+
+
+
 trigger:
 - none
 
