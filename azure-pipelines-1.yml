@@ -33,4 +33,4 @@ jobs:
     vmImage: ${{ parameters.vmImage }}
   steps:
   - script: hostname
-  - script: echo ${{ variables.JiraTasks }}
+  - script: echo ${{ myObject.JiraTasks }}
