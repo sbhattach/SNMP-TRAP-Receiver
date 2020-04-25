@@ -51,7 +51,7 @@ pool:
 strategy:
   matrix:
     Python27:
-      python.version: ${{ parameters.PythonVersion }}
+      python.version: ${ parameters.PythonVersion }
     #Python35:
     #  python.version: '3.5'
     #Python36:
