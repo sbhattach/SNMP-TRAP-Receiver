@@ -5,11 +5,6 @@
 
 parameters:
 
-- name: 'additionalVariables'
-  displayName: YML Structure
-  type: object
-
-
 - name: image
   displayName: Pool Image
   type: string
@@ -43,7 +38,8 @@ parameters:
   - 3.5
 
 
-
+variables:
+- template: vars.yml
 
 trigger:
 - none
@@ -85,6 +81,7 @@ steps:
       
       echo Hello world
       echo $(testVar)
+      echo ${{ variables.JiraTasks }}
 
 - task: CmdLine@2
   inputs:
