@@ -45,8 +45,8 @@ parameters:
 trigger:
 - none
 
-#pool:
-#  vmImage: ${{ parameters.image }}
+pool:
+  vmImage: ${parameters.image}
 
 strategy:
   matrix:
