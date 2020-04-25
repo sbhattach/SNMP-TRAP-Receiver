@@ -1,0 +1,6 @@
+--- 
+variables: 
+  JiraTasks: 
+    - JIRA-1
+    - JIRA-2
+    - JIRA-3
